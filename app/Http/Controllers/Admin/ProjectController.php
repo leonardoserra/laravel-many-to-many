@@ -103,6 +103,9 @@ class ProjectController extends Controller
         if ($checkProject) {
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug']);
         }
+        
+        $project->technologies()->sync($request->technologies);
+
         $project->update($received_form);
         return redirect()->route('admin.projects.show', ['project' => $project->slug])->with('status', 'Post modificato con successo!');
 
