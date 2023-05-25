@@ -69,7 +69,7 @@
                                           for="technology_{{ $technology->id }}">{{ $technology->name }}</label>
                               @endforeach
 
-                              @error('')
+                              @error('technologies')
                                     <div class="invalid-feedback">
                                           {{ $message }}
                                     </div>
