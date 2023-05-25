@@ -62,10 +62,11 @@
                         <div class="mb-3">Seleziona le tecnologie usate:</div>
                         <div class="btn-group">
                               @foreach ($technologies as $technology)
-                                    <input type="checkbox" class="btn-check" name="technologies[]" value=""
-                                          id="{{ $technology->name }}">
+                                    <input type="checkbox" class="btn-check" @if (in_array($technology->id, old('technologies', []))) checked @endif
+                                          name="technologies[]" value="{{ $technology->id }}"
+                                          id="technology_{{ $technology->id }}">
                                     <label class="btn btn-outline-primary"
-                                          for="{{ $technology->name }}">{{ $technology->name }}</label>
+                                          for="technology_{{ $technology->id }}">{{ $technology->name }}</label>
                               @endforeach
 
                               @error('')
