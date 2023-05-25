@@ -4,10 +4,16 @@
 @section('content')
       <div class="col-10">
             <div class="card">
-                  @if ($project->image_src)
-                        <img src="{{ $project->image_src }}" class="card-img-top" alt="{{ $project->title }}">
-                  @endif
                   <div class="card-body">
+                        <div>
+                              @foreach ($project->technologies as $technology)
+                                    <span class="badge rounded-pill text-bg-primary">{{ $technology->name }}</span>
+                              @endforeach
+                        </div>
+                        @if ($project->image_src)
+                              <img style="width: 35%" src="{{ $project->image_src }}" class="card-img-top"
+                                    alt="{{ $project->title }}">
+                        @endif
                         <h5 class="card-title">{{ $project->title }}</h5>
                         <h6 class="card-text">
                               Tipologia:
