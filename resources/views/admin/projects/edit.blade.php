@@ -60,6 +60,31 @@
                         @enderror
                   </div>
 
+                  <div class="mb-3">
+                        <div class="mb-3">Seleziona le tecnologie usate:</div>
+                        <div class="btn-group">
+                              @foreach ($technologies as $technology)
+                                    @if ($errors->any())
+                                          <input type="checkbox" class="btn-check"
+                                                @if (in_array($technology->id, old('technologies', []))) checked @endif name="technologies[]"
+                                                value="{{ $technology->id }}" id="technology_{{ $technology->id }}">
+                                    @else
+                                          <input type="checkbox" class="btn-check"
+                                                @if ($project->technologies->contains($technology->id)) checked @endif name="technologies[]"
+                                                value="{{ $technology->id }}" id="technology_{{ $technology->id }}">
+                                    @endif
+                                    <label class="btn btn-outline-primary"
+                                          for="technology_{{ $technology->id }}">{{ $technology->name }}</label>
+                              @endforeach
+
+                              @error('technologies')
+                                    <div class="invalid-feedback">
+                                          {{ $message }}
+                                    </div>
+                              @enderror
+                        </div>
+                  </div>
+
 
                   <div>
                         <button class="btn btn-warning" type="submit">Applica Modifiche</button>
