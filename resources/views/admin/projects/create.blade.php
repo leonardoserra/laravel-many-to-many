@@ -58,8 +58,27 @@
                         @enderror
                   </div>
 
+                  <div class="mb-3">
+                        <div class="mb-3">Seleziona le tecnologie usate:</div>
+                        <div class="btn-group">
+                              @foreach ($technologies as $technology)
+                                    <input type="checkbox" class="btn-check" name="technologies[]" value=""
+                                          id="{{ $technology->name }}">
+                                    <label class="btn btn-outline-primary"
+                                          for="{{ $technology->name }}">{{ $technology->name }}</label>
+                              @endforeach
 
-                  <button class="btn btn-success" type="submit">CREA</button>
+                              @error('')
+                                    <div class="invalid-feedback">
+                                          {{ $message }}
+                                    </div>
+                              @enderror
+                        </div>
+                  </div>
+
+                  <div>
+                        <button class="btn btn-success" type="submit">CREA</button>
+                  </div>
             </form>
 
       </div>
