@@ -51,6 +51,11 @@ class ProjectController extends Controller
             return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug per questo post, cambia il titolo']);
         }
         $newProject = Project::create($received_form);
+
+        if($newProject->has('technologies')){
+            $newProject->technologies()->attach($request->technologies);
+        }
+
         return redirect()->route('admin.projects.show', ['project' => $newProject->slug])->with('status', 'Post creato con successo!');
 
     }
