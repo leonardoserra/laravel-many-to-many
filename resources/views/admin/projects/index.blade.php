@@ -12,6 +12,7 @@
                               <th scope="col">Description</th>
                               <th scope="col">Slug</th>
                               <th scope="col">Tecnologie</th>
+                              {{-- <th scope="col">Tipologia</th> --}}
                               <th scope="col">Azione</th>
                         </tr>
                   </thead>
@@ -29,6 +30,17 @@
                                           @endforeach
 
                                     </td>
+
+                                    {{-- <td>
+
+
+
+                                          @foreach ($types->projects as $type)
+                                                <span class="badge rounded-pill text-bg-primary">{{ $type->type_name }}</span>
+                                          @endforeach
+
+
+                                    </td> --}}
 
                                     <td class="d-flex">
                                           <a class="btn btn-primary"

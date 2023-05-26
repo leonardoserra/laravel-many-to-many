@@ -32,6 +32,16 @@
                         </a>
 
                   </li>
+                  <li>
+                        <a href="{{ route('admin.types.index') }}"
+                              class="nav-link @if (Route::currentRouteName() == 'admin.types.index') active @endif link-body-emphasis">
+                              <svg class="bi pe-none me-2" width="16" height="16">
+                                    <use xlink:href="#speedometer2"></use>
+                              </svg>
+                              Interfaccia Tipologie
+                        </a>
+
+                  </li>
 
             </ul>
             <hr>

@@ -22,11 +22,11 @@
                                     <th scope="row">{{ $type->id }}</th>
                                     <td>{{ $type->type_name }}</td>
                                     <td>{{ $type->slug }}</td>
-                                    <td>{{ count($types) }}</td>
+                                    <td>{{ count($type->projects) }}</td>
 
 
 
-                                    <td class="d-flex">
+                                    <td class="d-flex align-items-start">
                                           <a class="btn btn-primary"
                                                 href="{{ route('admin.types.show', ['type' => $type->slug]) }}">Vedi</a>
                                           <a class="btn btn-warning ms-2 me-2"
