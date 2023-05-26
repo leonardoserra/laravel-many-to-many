@@ -12,7 +12,7 @@
                               <th scope="col">Description</th>
                               <th scope="col">Slug</th>
                               <th scope="col">Tecnologie</th>
-                              {{-- <th scope="col">Tipologia</th> --}}
+                              <th scope="col">Tipologia</th>
                               <th scope="col">Azione</th>
                         </tr>
                   </thead>
@@ -26,21 +26,17 @@
 
                                     <td>
                                           @foreach ($project->technologies as $technology)
-                                                <span class="badge rounded-pill text-bg-primary">{{ $technology->name }}</span>
+                                                <span
+                                                      class="badge rounded-pill text-bg-primary">{{ $technology->name }}</span>
                                           @endforeach
 
                                     </td>
 
-                                    {{-- <td>
+                                    <td>
+                                          <span
+                                                class="badge rounded-pill text-bg-primary">{{ $project->type ? $project->type->type_name : '' }}</span>
 
-
-
-                                          @foreach ($types->projects as $type)
-                                                <span class="badge rounded-pill text-bg-primary">{{ $type->type_name }}</span>
-                                          @endforeach
-
-
-                                    </td> --}}
+                                    </td>
 
                                     <td class="d-flex">
                                           <a class="btn btn-primary"
