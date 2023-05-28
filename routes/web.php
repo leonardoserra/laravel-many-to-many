@@ -24,21 +24,21 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-Route::middleware('auth','verified')
+Route::middleware('auth', 'verified')
     ->name('admin.')
     ->prefix('admin')
-    ->group(function (){
+    ->group(function () {
 
-        Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('projects',ProjectController::class)->parameters([
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('projects', ProjectController::class)->parameters([
             'projects' => 'project:slug'
-        ]); 
-        Route::resource('types',TypeController::class)->parameters([
-            'types' => 'type:slug'
         ]);
-        Route::resource('technologies',TechnologyController::class)->parameters([
+        Route::resource('types', TypeController::class)->parameters([
+            'types' => 'type:slug'
+        ])->except('show');
+        Route::resource('technologies', TechnologyController::class)->parameters([
             'technologies' => 'technology:slug'
-        ]); 
+        ]);
     });
 
 Route::middleware('auth')->group(function () {
@@ -47,4 +47,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
