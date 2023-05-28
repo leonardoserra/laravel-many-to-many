@@ -38,7 +38,7 @@ Route::middleware('auth', 'verified')
         ])->except('show');
         Route::resource('technologies', TechnologyController::class)->parameters([
             'technologies' => 'technology:slug'
-        ]);
+        ])->only('index');
     });
 
 Route::middleware('auth')->group(function () {

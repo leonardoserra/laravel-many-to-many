@@ -38,7 +38,7 @@
 
                                     </td>
 
-                                    <td class="d-flex">
+                                    <td class="d-flex my-table-row align-items-center">
                                           <a class="btn btn-primary"
                                                 href="{{ route('admin.projects.show', ['project' => $project->slug]) }}">Vedi</a>
                                           <a class="btn btn-warning ms-2 me-2"
