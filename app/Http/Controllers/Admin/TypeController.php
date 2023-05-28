@@ -1,9 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Type;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreTypeRequest;
+use App\Http\Requests\UpdateTypeRequest;
+// use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 
 
@@ -27,7 +32,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+        return view('admin.types.create', compact('types'));
     }
 
     /**
@@ -36,9 +42,20 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTypeRequest $request)
     {
-        //
+        $received_form = $request->validated();
+
+        $received_form['slug'] = Str::slug($request->type_name);
+
+        $checkType = Type::where('slug', $received_form['slug'])->first();
+        if ($checkType) {
+            return back()->withInput()->withErrors(['slug' => 'Impossibile creare lo slug per questa tipologia, cambia nome']);
+        }
+
+        $newType = Type::create($received_form);
+
+        return redirect()->route('admin.types.index')->with('status', 'nuova tipologia creata con successo');
     }
 
     /**
@@ -60,7 +77,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('admin.types.edit', compact('type'));
     }
 
     /**
@@ -70,9 +87,18 @@ class TypeController extends Controller
      * @param  \App\Models\Admin\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Type $type)
+    public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+        $received_form = $request->validated();
+        $received_form['slug'] = Str::slug($request->type_name, '-');
+
+        $checkType = Type::where('slug', $received_form['slug'])->where('id', '<>', $type->id)->first();
+        if ($checkType) {
+            return back()->withInput()->withErrors(['slug' => 'impossibile creare lo slug con quel nome']);
+        }
+
+        $type->update($received_form);
+        return redirect()->route('admin.types.index')->with('status', 'Modifiche apportate correttamente');
     }
 
     /**
@@ -83,6 +109,7 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('admin.types.index')->with('status', 'Tipologia eliminata');
     }
 }

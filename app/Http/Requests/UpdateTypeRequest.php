@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Type;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreTypeRequest extends FormRequest
+class UpdateTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +26,8 @@ class StoreTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'type_name' => 'required|max:50|unique:types',
+            'type_name' => ['required', 'max:150', Rule::unique(Type::class)->ignore($this->type)],
+            // 'slug' => 'required|max:50',
         ];
     }
 }

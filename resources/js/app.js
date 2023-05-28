@@ -8,20 +8,27 @@ import.meta.glob([
 
 
 const deleteButtons = document.querySelectorAll('.form_delete_project button[type="submit"]');
+const deleteTypesButtons = document.querySelectorAll('.form_delete_type button[type="submit"]');
 
-deleteButtons.forEach(button => {
-    button.addEventListener('click', event => {
-        event.preventDefault();
+deleteFormPointer(deleteButtons);
+deleteFormPointer(deleteTypesButtons);
 
-        const modal = document.getElementById('confirmModal');
 
-        const bootstrapModal = new bootstrap.Modal(modal);
-        bootstrapModal.show();
+function deleteFormPointer(elementToPoint) {
+    elementToPoint.forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
 
-        const confirmDeleteBtn = modal.querySelector('.btn.btn-danger')
+            const modal = document.getElementById('confirmModal');
 
-        confirmDeleteBtn.addEventListener('click', () => {
-            button.parentElement.submit();
-        });
-    })
-});
+            const bootstrapModal = new bootstrap.Modal(modal);
+            bootstrapModal.show();
+
+            const confirmDeleteBtn = modal.querySelector('.btn.btn-danger')
+
+            confirmDeleteBtn.addEventListener('click', () => {
+                button.parentElement.submit();
+            });
+        })
+    });
+}
